@@ -26,7 +26,7 @@ public class ExecutionMain {
     }
 
     /**
-     * 接收对应的配置文件名，不带后缀。
+     * 接收对应的配置文件名，不需要后缀。
      * 对应一个json配置文件，包含了发送信息
      * @param args
      */
