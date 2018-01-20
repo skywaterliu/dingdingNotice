@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import java.io.*;
 
+/**
+ * Json文件转JSONObject
+ */
 public class JsonFileParser {
 
     public static JSONObject getJsonObject(String path){

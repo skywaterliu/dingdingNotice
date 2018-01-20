@@ -9,14 +9,20 @@ import com.dingding.util.JsonFileScanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ExecutionMain {
     private static ApplicationContext context;
+    private static JsonContentConverter jsonContentConverter;
+    private static MessageSender messageSender;
+    private static JsonFileScanner scanner;
 
     static {
         context = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
+        messageSender = context.getBean(DingDingNoticeSender.class);
+        scanner = context.getBean(JsonFileScanner.class);
+        jsonContentConverter = context.getBean(JsonContentConverter.class);
     }
 
     /**
@@ -26,9 +32,6 @@ public class ExecutionMain {
      */
     public static void main(String[] args) {
         if(args.length == 0) throw new RuntimeException("未传入参数");
-
-        MessageSender messageSender = context.getBean(DingDingNoticeSender.class);
-        JsonFileScanner scanner = context.getBean(JsonFileScanner.class);
 
         String jsonFileDir = (String) CustomizedPropertyConfigurer.getContextProperty("sendInfoJsonFileDir");
         String sendURL = (String) CustomizedPropertyConfigurer.getContextProperty("url");
