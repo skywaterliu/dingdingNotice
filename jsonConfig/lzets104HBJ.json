@@ -1,0 +1,12 @@
+{
+  "msgtype": "text",
+  "text": {
+    "content": "我就是我, ${currentDate}是不一样的\n烟\n火"
+  },
+  "at": {
+    "atMobiles": [
+      "15996471747"
+    ],
+    "isAtAll": false
+  }
+}
