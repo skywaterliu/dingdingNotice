@@ -13,6 +13,6 @@
     |- test.bat
 
 3. maven获取依赖<br/>
-在pom.xml目录下，执行
+在pom.xml目录下，执行1
 ```mermaid
 mvn dependency:copy-dependencies -DoutputDirectory=lib   -DincludeScope=compile
