@@ -8,16 +8,16 @@
 
     <!--<context:property-placeholder location="classpath:config.properties" ignore-unresolvable="true"/>-->
 
-    <bean id="propertyConfigurer" class="com.dingding.util.CustomizedPropertyConfigurer">
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
-        <property name="locations">
-            <list>
-                <value>classpath:config.properties</value>
-                <!-- 当properties文件在jar包外部时使用file: -->
-                <!--<value>file:config.properties</value>-->
-            </list>
-        </property>
-    </bean>
+    <!--<bean id="propertyConfigurer" class="com.dingding.util.CustomizedPropertyConfigurer">-->
+        <!--<property name="ignoreUnresolvablePlaceholders" value="true"/>-->
+        <!--<property name="locations">-->
+            <!--<list>-->
+                <!--<value>classpath:config.properties</value>-->
+                <!--&lt;!&ndash; 当properties文件在jar包外部时使用file: &ndash;&gt;-->
+                <!--&lt;!&ndash;<value>file:config.properties</value>&ndash;&gt;-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
 
     <context:component-scan base-package="com.dingding"/>
 

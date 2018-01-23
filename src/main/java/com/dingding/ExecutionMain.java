@@ -9,8 +9,13 @@ import com.dingding.util.JsonFileScanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Properties;
 
 public class ExecutionMain {
     private static ApplicationContext context;
@@ -25,17 +30,49 @@ public class ExecutionMain {
      * @param args
      */
     public static void main(String[] args) {
+        System.out.println("jar执行目录："+ExecutionMain.getProjectPath());
+
         if(args.length == 0) throw new RuntimeException("未传入参数");
 
         MessageSender messageSender = context.getBean(DingDingNoticeSender.class);
         JsonFileScanner scanner = context.getBean(JsonFileScanner.class);
 
-        String jsonFileDir = (String) CustomizedPropertyConfigurer.getContextProperty("sendInfoJsonFileDir");
-        String sendURL = (String) CustomizedPropertyConfigurer.getContextProperty("url");
+        Properties properties = loadProperties();
+        //获取发送信息
+        JSONObject messageInfo = scanner.findJsonFromDirectory(args[0],properties.getProperty("sendInfoJsonFileDir"));
+        //发送信息
+        messageSender.sendMessage(properties.getProperty("url"),messageInfo);
+    }
 
-        JSONObject messageInfo = scanner.findJsonFromDirectory(args[0],jsonFileDir);
+    /**
+     * 加载jar包所在目录的
+     * @return
+     */
+    private static Properties loadProperties(){
+        Properties properties = new Properties();
+        try {
+            String path = ExecutionMain.getProjectPath() + File.separator + "config.properties";
+            System.out.println("配置文件路径："+path);
+            properties.load(new FileInputStream(path));
+        } catch (IOException e) {
+            throw new RuntimeException("config.properties读取失败");
+        }
+        return properties;
+    }
 
-        messageSender.sendMessage(sendURL,messageInfo);
+    private static String getProjectPath() {
+        java.net.URL url = ExecutionMain.class.getProtectionDomain().getCodeSource().getLocation();
+        String filePath = null;
+        try {
+            filePath = java.net.URLDecoder.decode(url.getPath(), "utf-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (filePath.endsWith(".jar"))
+            filePath = filePath.substring(0, filePath.lastIndexOf("/") + 1);
+        java.io.File file = new java.io.File(filePath);
+        filePath = file.getAbsolutePath();
+        return filePath;
     }
 
 }
