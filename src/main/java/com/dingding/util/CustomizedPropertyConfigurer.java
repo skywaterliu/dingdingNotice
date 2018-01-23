@@ -10,6 +10,7 @@ import java.util.Properties;
 
 /**
  * properties文件内容运行时获取
+ * applicationContext.xml中的properties Bean继承自此类
  */
 public class CustomizedPropertyConfigurer extends PropertyPlaceholderConfigurer {
     private static Map<String, Object> ctxPropertiesMap;
