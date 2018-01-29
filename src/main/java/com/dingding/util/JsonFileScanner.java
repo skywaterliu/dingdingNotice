@@ -11,10 +11,10 @@ import java.io.FilenameFilter;
 public class JsonFileScanner {
 
     public JSONObject findJsonFromDirectory(String targetJsonName,String jsonFileDir){
-        System.out.println("jsonFileDir:"+jsonFileDir);
-        System.out.println("targetJsonName:"+targetJsonName);
-
         if(jsonFileDir == null || jsonFileDir.equals("")) throw new RuntimeException("路径为空");
+
+        System.out.println("jsonConfig路径:"+jsonFileDir);
+        System.out.println("目标json:"+targetJsonName);
 
         File targetDir = new File(jsonFileDir);
         if(!targetDir.isDirectory()) throw new RuntimeException("该路径不是文件夹");

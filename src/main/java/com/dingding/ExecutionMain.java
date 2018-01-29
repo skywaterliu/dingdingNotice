@@ -39,7 +39,7 @@ public class ExecutionMain {
 
         Properties properties = loadProperties();
         //获取发送信息
-        JSONObject messageInfo = scanner.findJsonFromDirectory(args[0],properties.getProperty("sendInfoJsonFileDir"));
+        JSONObject messageInfo = scanner.findJsonFromDirectory(args[0],loadJsonConfigDir());
         //发送信息
         messageSender.sendMessage(properties.getProperty("url"),messageInfo);
     }
@@ -58,6 +58,10 @@ public class ExecutionMain {
             throw new RuntimeException("config.properties读取失败");
         }
         return properties;
+    }
+
+    private static String loadJsonConfigDir(){
+        return ExecutionMain.getProjectPath() + File.separator + "jsonConfig";
     }
 
     private static String getProjectPath() {
