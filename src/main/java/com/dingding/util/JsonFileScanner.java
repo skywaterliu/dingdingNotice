@@ -7,9 +7,18 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FilenameFilter;
 
+/**
+ * Json文件扫描
+ */
 @Service
 public class JsonFileScanner {
 
+    /**
+     * 通过文件名称获取JSONObject
+     * @param targetJsonName
+     * @param jsonFileDir
+     * @return
+     */
     public JSONObject findJsonFromDirectory(String targetJsonName,String jsonFileDir){
         if(jsonFileDir == null || jsonFileDir.equals("")) throw new RuntimeException("路径为空");
 
@@ -34,6 +43,9 @@ public class JsonFileScanner {
         return fileName.substring(0,fileName.toLowerCase().indexOf(".json")).equals(targetJsonName);
     }
 
+    /**
+     * 只拿json文件
+     */
     private class JsonFileFilter implements FilenameFilter {
         public boolean accept(File dir, String name) {
             if(name.toLowerCase().endsWith(".json")){

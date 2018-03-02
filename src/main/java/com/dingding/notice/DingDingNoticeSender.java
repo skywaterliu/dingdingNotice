@@ -2,7 +2,6 @@ package com.dingding.notice;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dingding.util.JsonContentConverter;
-import com.dingding.util.VariableConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
